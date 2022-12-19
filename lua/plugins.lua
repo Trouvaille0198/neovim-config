@@ -63,7 +63,7 @@ packer.startup({
 		-- 注释代码快捷键
 		use("numToStr/Comment.nvim")
 		-- coc
-		use({'neoclide/coc.nvim', branch='release'})
+		use({'neoclide/coc.nvim', branch='release',run = function() require('plugin-config.coc-setup').setup() end})
 	end,
 	config = {
 		-- 并发数限制

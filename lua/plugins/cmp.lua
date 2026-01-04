@@ -4,7 +4,6 @@ return {
     version = false, -- last release is way too old
     event = "InsertEnter",
     dependencies = {
-      "zbirenbaum/copilot.lua",
       "ray-x/cmp-treesitter",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
@@ -39,18 +38,18 @@ return {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
           }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              -- cmp.select_next_item()
-              cmp.confirm({
-                select = true,
-              })
-            elseif require("copilot.suggestion").is_visible() then
-              require("copilot.suggestion").accept()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
+          -- ["<Tab>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     -- cmp.select_next_item()
+          --     cmp.confirm({
+          --       select = true,
+          --     })
+          --   elseif require("copilot.suggestion").is_visible() then
+          --     require("copilot.suggestion").accept()
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" }),
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()

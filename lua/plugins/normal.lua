@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.comment",
+    "nvim-mini/mini.comment",
     event = "VeryLazy",
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
     keys = {

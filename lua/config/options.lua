@@ -9,3 +9,9 @@ end
 
 local opt = vim.opt
 opt.shiftwidth = 4 -- Size of an indent
+
+vim.g.lazyvim_picker = "telescope"
+
+-- python
+vim.g.lazyvim_python_lsp = "pyright"
+vim.g.lazyvim_python_ruff = "ruff"

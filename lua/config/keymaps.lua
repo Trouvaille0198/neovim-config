@@ -5,7 +5,6 @@ local Util = require("lazyvim.util")
 local map = vim.api.nvim_set_keymap
 -- 复用 opt 参数
 local opt = { noremap = true, silent = true }
-
 -- Alt + hjkl  窗口之间跳转
 map("n", "<A-h>", "<C-w>h", opt)
 map("n", "<A-j>", "<C-w>j", opt)
@@ -53,15 +52,17 @@ map("v", ">", ">gv", opt)
 -- 上下移动选中文本
 map("v", "J", ":move '>+1<CR>gv-gv", opt)
 map("v", "K", ":move '<-2<CR>gv-gv", opt)
+
 -- insert 模式下，跳到行首行尾
-map("i", "<C-h>", "<ESC>I", opt)
-map("i", "<C-l>", "<ESC>A", opt)
+map("i", "H", "<ESC>I", opt)
+map("i", "L", "<ESC>A", opt)
 -- normal 模式下，跳到行首行尾
-map("n", "<C-h>", "0", opt)
-map("n", "<C-l>", "$", opt)
+map("n", "H", "0", opt)
+map("n", "L", "$", opt)
 -- visual 模式下，跳到行首行尾
-map("v", "<C-h>", "0", opt)
-map("v", "<C-l>", "$", opt)
+map("v", "H", "0", opt)
+map("v", "L", "$", opt)
+
 -- 取消 J 和 K
 map("n", "J", "", opt)
 map("n", "K", "", opt)
@@ -71,10 +72,10 @@ map("i", "<C-s>", "<Esc>:w<cr>", opt)
 
 -- 关闭buffer
 if Util.has("vim-bbye") then
-  map("n", "<C-w>", ":Bdelete!<CR>", opt)
-  map("n", "<leader>bl", ":BufferLineCloseRight<CR>", opt)
-  map("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opt)
-  map("n", "<leader>bc", ":BufferLinePickClose<CR>", opt)
+	map("n", "<C-w>", ":Bdelete!<CR>", opt)
+	map("n", "<leader>bl", ":BufferLineCloseRight<CR>", opt)
+	map("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opt)
+	map("n", "<leader>bc", ":BufferLinePickClose<CR>", opt)
 end
 
 -- Telescope
@@ -86,6 +87,36 @@ if Util.has("telescope.nvim") then
   map("n", "<C-c>", '"+y', opt)
 end
 
-if Util.has("neo-tree.nvim") then
-  map("n", "<A-m>", "<Cmd>Neotree toggle reveal<CR>", opt)
-end
+-- 切换 Neo-tree 侧边栏（Ctrl+b）
+map("n", "<C-b>", ":Neotree toggle<CR>", opt)
+map("i", "<C-b>", "<Esc>:Neotree toggle<CR>", opt)
+map("t", "<C-b>", [[ <C-\><C-N>:Neotree toggle<CR> ]], opt)
+
+-- treesitter 折叠
+map("n", "zc", ":foldclose<CR>", opt)
+map("n", "zo", ":foldopen<CR>", opt)
+
+-- Ctrl+Backspace -> 删除上一个词（兼容多种终端表示）
+map("i", "<C-h>", "<C-o>db", opt) -- 在 Insert 模式下执行一次 normal db
+map("n", "<C-h>", "db", opt)
+map("v", "<C-h>", "d", opt)
+map("t", "<C-h>", [[ <C-\><C-N>db ]], opt)
+map("c", "<C-h>", "<C-w>", { noremap = false })
+
+-- -- git
+-- if vim.fn.executable("lazygit") == 1 then
+-- 	map("n", "<leader>gg", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+-- 	map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
+--   end
+  
+--   map("n", "<leader>gL", function() Snacks.picker.git_log() end, { desc = "Git Log (cwd)" })
+--   map("n", "<leader>gb", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
+--   map("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Git Current File History" })
+--   map("n", "<leader>gl", function() Snacks.picker.git_log({ cwd = LazyVim.root.git() }) end, { desc = "Git Log" })
+--   map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
+--   map({"n", "x" }, "<leader>gY", function()
+-- 	Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
+--   end, { desc = "Git Browse (copy)" })
+
+-- -- quit
+-- map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })

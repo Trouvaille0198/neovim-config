@@ -39,7 +39,7 @@ map("v", "<C-k>", "5k", opt)
 map("c", "<C-j>", "<C-n>", { noremap = false })
 map("c", "<C-k>", "<C-p>", { noremap = false })
 -- 取消 s 默认功能
-map("n", "s", "", opt)
+-- map("n", "s", "", opt)
 map("n", "sv", ":vsp<CR>", opt)
 map("n", "sb", ":sp<CR>", opt)
 -- 关闭当前
@@ -80,11 +80,11 @@ end
 
 -- Telescope
 if Util.has("telescope.nvim") then
-  -- 查找文件
-  map("n", "<C-p>", ":Telescope find_files<CR>", opt)
-  -- 全局搜索
-  map("n", "<C-f>", ":Telescope live_grep<CR>", opt)
-  map("n", "<C-c>", '"+y', opt)
+	-- 查找文件
+	map("n", "<C-p>", ":Telescope find_files<CR>", opt)
+	-- 全局搜索
+	map("n", "<C-f>", ":Telescope live_grep<CR>", opt)
+	map("n", "<C-c>", '"+y', opt)
 end
 
 -- 切换 Neo-tree 侧边栏（Ctrl+b）
@@ -108,7 +108,7 @@ map("c", "<C-h>", "<C-w>", { noremap = false })
 -- 	map("n", "<leader>gg", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
 -- 	map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
 --   end
-  
+
 --   map("n", "<leader>gL", function() Snacks.picker.git_log() end, { desc = "Git Log (cwd)" })
 --   map("n", "<leader>gb", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
 --   map("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Git Current File History" })
